@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Page Commenter",
+  "version": "1.0",
+  "description": "Leave comments on any part of a webpage",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["content.css"],
+      "js": ["content.js"]
+    }
+  ]
+}

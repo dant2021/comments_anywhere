@@ -1,0 +1,186 @@
+:root {
+  --lb-radius: 0.5em;
+  --lb-spacing: 1em;
+  --lb-accent: #17f;
+  --lb-accent-foreground: #fff;
+  --lb-background: #fff;
+  --lb-foreground: #111;
+  --lb-foreground-subtle: rgba(17, 17, 17, 0.1);
+  --lb-foreground-moderate: rgba(17, 17, 17, 0.5);
+  --lb-foreground-tertiary: rgba(17, 17, 17, 0.7);
+  --lb-transition-duration: 0.1s;
+  --lb-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.newThreadCursor {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+  z-index: 9999;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 2px 6px rgb(0 0 0 / 4%),
+    0 8px 26px rgb(0 0 0 / 6%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newThreadCursor::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="%2317f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.newThreadCursor::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-image: url('${currentUser.avatar}');
+  background-size: cover;
+  background-position: center;
+}
+
+.draggableThread {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  background: var(--lb-background);
+  border-radius: var(--lb-radius);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 4%), 0 2px 6px rgb(0 0 0 / 4%), 0 8px 26px rgb(0 0 0 / 6%);
+  transition: box-shadow var(--lb-transition-duration) var(--lb-transition-easing);
+}
+
+.draggableThread:hover {
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 6%), 0 4px 12px rgb(0 0 0 / 6%), 0 12px 32px rgb(0 0 0 / 8%);
+}
+
+.comment {
+  display: flex;
+  padding: var(--lb-spacing);
+  border-bottom: 1px solid var(--lb-foreground-subtle);
+  transition: background-color var(--lb-transition-duration) var(--lb-transition-easing);
+}
+
+.comment:hover {
+  background-color: var(--lb-foreground-subtle);
+}
+
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: calc(0.75 * var(--lb-spacing));
+  background-size: cover;
+  background-position: center;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-content strong {
+  display: block;
+  margin-bottom: calc(0.25 * var(--lb-spacing));
+  font-size: 14px;
+  color: var(--lb-foreground);
+}
+
+.comment-content p {
+  font-size: 14px;
+  margin: 0;
+  color: var(--lb-foreground-tertiary);
+}
+
+.reply-form {
+  display: flex;
+  padding: var(--lb-spacing);
+  border-top: 1px solid var(--lb-foreground-subtle);
+}
+
+.reply-form textarea {
+  flex: 1;
+  height: 36px;
+  padding: 8px;
+  border: 1px solid var(--lb-foreground-subtle);
+  border-radius: calc(0.5 * var(--lb-radius));
+  resize: none;
+  font-size: 14px;
+  transition: border-color var(--lb-transition-duration) var(--lb-transition-easing);
+}
+
+.reply-form textarea:focus {
+  outline: none;
+  border-color: var(--lb-accent);
+}
+
+.reply-button {
+  margin-left: calc(0.5 * var(--lb-spacing));
+  padding: 0 12px;
+  height: 36px;
+  background: var(--lb-accent);
+  color: var(--lb-accent-foreground);
+  border: none;
+  border-radius: calc(0.5 * var(--lb-radius));
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color var(--lb-transition-duration) var(--lb-transition-easing);
+}
+
+.reply-button:hover {
+  background-color: color-mix(in srgb, var(--lb-accent) 80%, black);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lb-background: #222;
+    --lb-foreground: #fff;
+    --lb-foreground-subtle: rgba(255, 255, 255, 0.1);
+    --lb-foreground-moderate: rgba(255, 255, 255, 0.5);
+    --lb-foreground-tertiary: rgba(255, 255, 255, 0.7);
+  }
+
+  .draggableThread {
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 4%), 0 2px 6px rgb(0 0 0 / 20%), 0 8px 26px rgb(0 0 0 / 25%);
+  }
+
+  .draggableThread:hover {
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 6%), 0 4px 12px rgb(0 0 0 / 25%), 0 12px 32px rgb(0 0 0 / 30%);
+  }
+
+  .reply-form textarea {
+    background: #333;
+    color: var(--lb-foreground);
+    border-color: var(--lb-foreground-subtle);
+  }
+}
+
+@keyframes lb-animation-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.draggableThread {
+  animation: lb-animation-appear var(--lb-transition-duration) var(--lb-transition-easing);
+}
+
+.comment {
+  animation: lb-animation-appear var(--lb-transition-duration) var(--lb-transition-easing);
+  animation-fill-mode: both;
+  animation-delay: calc(var(--comment-index, 0) * 0.05s);
+}
