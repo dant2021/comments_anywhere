@@ -1,6 +1,8 @@
 # Page Commenter
 
 Page Commenter is a Chrome extension that allows users to leave comments on any part of a webpage for demo purposes.
+![image](https://github.com/user-attachments/assets/59bbe3dc-d400-4964-941d-16b72b2749d3)
+
 
 ## Features
 
